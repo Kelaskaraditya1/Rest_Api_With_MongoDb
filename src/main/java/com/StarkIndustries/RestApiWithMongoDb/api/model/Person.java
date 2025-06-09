@@ -24,8 +24,6 @@ public class Person {
 
     private List<String> hobbies;
 
-    @OneToOne
-    @JsonManagedReference
     private Address address;
 
     public Person(Long personId, String name, String sex, int age, String education, List<String> hobbies, Address address) {

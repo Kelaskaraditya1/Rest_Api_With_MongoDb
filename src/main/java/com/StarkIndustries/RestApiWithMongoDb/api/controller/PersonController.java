@@ -99,4 +99,11 @@ public class PersonController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Enter Persons first!!");
     }
 
+    @DeleteMapping("/delete-person/{id}")
+    public ResponseEntity<?> deletePerson(@PathVariable("id") Long personId){
+        if(this.personService.deletePerson(personId))
+            return ResponseEntity.status(HttpStatus.OK).body("Person deleted successfully!!");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person doesn't exist!!");
+    }
+
 }

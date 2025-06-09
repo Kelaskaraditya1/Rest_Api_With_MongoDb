@@ -27,4 +27,12 @@ public class PersonService {
         return this.personRepository.findAll();
     }
 
+    public boolean deletePerson(Long personId){
+        if(this.personRepository.existsById(personId)){
+            this.personRepository.deleteById(personId);
+            return true;
+        }
+        return false;
+    }
+
 }

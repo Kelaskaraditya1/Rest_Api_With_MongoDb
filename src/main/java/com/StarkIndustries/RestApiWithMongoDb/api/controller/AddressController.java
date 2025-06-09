@@ -41,4 +41,12 @@ public class AddressController {
             return ResponseEntity.status(HttpStatus.OK).body(addressList);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Address doesn't exist!!");
     }
+
+    @DeleteMapping("/delete-address/{id}")
+    public ResponseEntity<?> deleteAddress(@PathVariable("id") Long addressId){
+        if(this.addressService.deleteAddress(addressId))
+            return ResponseEntity.status(HttpStatus.OK).body("Address deleted Successfully!!");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Address doesn't exist!!");
+    }
+
 }

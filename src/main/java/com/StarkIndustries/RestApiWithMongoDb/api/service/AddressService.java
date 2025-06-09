@@ -31,6 +31,7 @@ public class AddressService {
             address.setCountry(addressDto.getCountry());
             address.setPinCode(addressDto.getPinCode());
             person.setAddress(address);
+            this.personRepository.save(person);
             this.addressRepository.save(address);
             return address;
         }
@@ -45,5 +46,13 @@ public class AddressService {
 
     public List<Address> getAllAddresses(){
         return this.addressRepository.findAll();
+    }
+
+    public boolean deleteAddress(Long addressId){
+        if(this.addressRepository.existsById(addressId)){
+            this.addressRepository.deleteById(addressId);
+            return true;
+        }
+        return false;
     }
 }
