@@ -1,9 +1,12 @@
 package com.StarkIndustries.RestApiWithMongoDb.api.service;
 
 import com.StarkIndustries.RestApiWithMongoDb.api.model.Person;
+import com.StarkIndustries.RestApiWithMongoDb.api.repository.CustomPersonRepository;
 import com.StarkIndustries.RestApiWithMongoDb.api.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -12,6 +15,9 @@ public class PersonService {
 
     @Autowired
     public PersonRepository personRepository;
+
+    @Autowired
+    public CustomPersonRepository customPersonRepository;
 
     public Person addPerson(Person person){
         return this.personRepository.save(person);
@@ -33,6 +39,15 @@ public class PersonService {
             return true;
         }
         return false;
+    }
+
+    public List<Person> getPersonsForSentimentAnalysis(){
+
+        return this.customPersonRepository.findPersonsForSentimentAnalysis();
+    }
+
+    public List<Person> getPersonByAge(int lowerLimit,int upperLimit){
+        return this.customPersonRepository.getPersonsOfAge(lowerLimit,upperLimit);
     }
 
 }

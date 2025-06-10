@@ -26,6 +26,22 @@ public class Person {
 
     private Address address;
 
+    private String email;
+
+    private boolean sentimentAnalysis;
+
+    public Person(Long personId, String name, String sex, int age, String education, List<String> hobbies, Address address, String email, boolean sentimentAnalysis) {
+        this.personId = personId;
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.education = education;
+        this.hobbies = hobbies;
+        this.address = address;
+        this.email = email;
+        this.sentimentAnalysis = sentimentAnalysis;
+    }
+
     public Person(Long personId, String name, String sex, int age, String education, List<String> hobbies, Address address) {
         this.personId = personId;
         this.name = name;
@@ -105,6 +121,22 @@ public class Person {
         this.address = address;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isSentimentAnalysis() {
+        return sentimentAnalysis;
+    }
+
+    public void setSentimentAnalysis(boolean sentimentAnalysis) {
+        this.sentimentAnalysis = sentimentAnalysis;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -115,6 +147,8 @@ public class Person {
                 ", education='" + education + '\'' +
                 ", hobbies=" + hobbies +
                 ", address=" + address +
+                ", email='" + email + '\'' +
+                ", sentimentAnalysis=" + sentimentAnalysis +
                 '}';
     }
 }

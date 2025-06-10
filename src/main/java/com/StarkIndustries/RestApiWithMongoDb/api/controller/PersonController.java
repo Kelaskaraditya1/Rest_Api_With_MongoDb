@@ -106,4 +106,20 @@ public class PersonController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person doesn't exist!!");
     }
 
+    @GetMapping("/get-sentiment-analysis")
+    public ResponseEntity<?> getPersonForSentimentAnalysis(){
+        List<Person> personList = this.personService.getPersonsForSentimentAnalysis();
+        if(!personList.isEmpty())
+            return ResponseEntity.status(HttpStatus.OK).body(personList);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Enter proper Person's first!!");
+    }
+
+    @GetMapping("/get-person-by-age/{lowerLimit}/{upperLimit}")
+    public ResponseEntity<?> getPersonByAge(@PathVariable("lowerLimit") int lowerLimit,@PathVariable("upperLimit") int upperLimit){
+        List<Person> personList = this.personService.getPersonByAge(lowerLimit,upperLimit);
+        if(!personList.isEmpty())
+            return ResponseEntity.status(HttpStatus.OK).body(personList);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Enter proper Person's first!!");
+    }
+
 }

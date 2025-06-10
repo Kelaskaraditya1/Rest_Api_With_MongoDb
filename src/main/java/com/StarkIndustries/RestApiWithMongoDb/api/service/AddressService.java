@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,6 +31,7 @@ public class AddressService {
             address.setAreaName(addressDto.getAreaName());
             address.setCountry(addressDto.getCountry());
             address.setPinCode(addressDto.getPinCode());
+            address.setLocalDateTime(LocalDateTime.now());
             person.setAddress(address);
             this.personRepository.save(person);
             this.addressRepository.save(address);
