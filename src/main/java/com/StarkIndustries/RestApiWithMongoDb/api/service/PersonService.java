@@ -41,13 +41,17 @@ public class PersonService {
         return false;
     }
 
-    public List<Person> getPersonsForSentimentAnalysis(){
+//    public List<Person> getPersonsForSentimentAnalysis(){
+//
+//        return this.customPersonRepository.findPersonsForSentimentAnalysis();
+//    }
+//
+//    public List<Person> getPersonByAge(int lowerLimit,int upperLimit){
+//        return this.customPersonRepository.getPersonsOfAge(lowerLimit,upperLimit);
+//    }
 
-        return this.customPersonRepository.findPersonsForSentimentAnalysis();
-    }
-
-    public List<Person> getPersonByAge(int lowerLimit,int upperLimit){
-        return this.customPersonRepository.getPersonsOfAge(lowerLimit,upperLimit);
+    public List<Person> getPersonByRoleAndCoding(){
+        return this.customPersonRepository.findByRoleAndCoding();
     }
 
 }

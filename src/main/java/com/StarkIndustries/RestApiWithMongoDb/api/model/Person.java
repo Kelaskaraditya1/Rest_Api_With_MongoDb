@@ -30,6 +30,21 @@ public class Person {
 
     private boolean sentimentAnalysis;
 
+    private String role;
+
+    public Person(Long personId, String name, String sex, int age, String education, List<String> hobbies, Address address, String email, boolean sentimentAnalysis, String role) {
+        this.personId = personId;
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.education = education;
+        this.hobbies = hobbies;
+        this.address = address;
+        this.email = email;
+        this.sentimentAnalysis = sentimentAnalysis;
+        this.role = role;
+    }
+
     public Person(Long personId, String name, String sex, int age, String education, List<String> hobbies, Address address, String email, boolean sentimentAnalysis) {
         this.personId = personId;
         this.name = name;
@@ -135,6 +150,14 @@ public class Person {
 
     public void setSentimentAnalysis(boolean sentimentAnalysis) {
         this.sentimentAnalysis = sentimentAnalysis;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.StarkIndustries.RestApiWithMongoDb.api.repository;
 
 import com.StarkIndustries.RestApiWithMongoDb.api.model.Person;
+import org.aspectj.weaver.patterns.PerObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -15,7 +16,7 @@ public class CustomPersonRepository {
     /* Criteria Api:
      *  used to write custom query method's for performing complex query's
      *  uses MongoTemplate , autowire it.
-     *  1) Create a Query object.
+     *  1) Create a Query object,Query query = new Query().
      *  2) use query.addFilter(Criteria.where("attribute").condn("...").....chaining)
      *  3) mongoTemplate.find(query,<Name of Class/Model on which operation has to be operated>.class)
      *  4) Some Standard methods:
@@ -45,23 +46,40 @@ public class CustomPersonRepository {
     @Autowired
     public MongoTemplate mongoTemplate;
 
-     public List<Person> findPersonsForSentimentAnalysis(){
+//     public List<Person> findPersonsForSentimentAnalysis(){
+//
+//         Query query = new Query();
+//         Criteria criteria1 = Criteria.where("email").exists(true);
+//         Criteria criteria2 = Criteria.where("sentimentAnalysis").is(true);
+//         query.addCriteria(criteria1.andOperator(Criteria.where("sentimentAnalysis").is(true)));
+//
+//
+//         List<Person> personList = mongoTemplate.find(query,Person.class);
+//         return personList;
+//     }
+//
+//     public List<Person> getPersonsOfAge(int lowerLimit,int upperLimit){
+//
+//         Query query  = new Query();
+//         query.addCriteria(Criteria.where("age").gte(lowerLimit).lte(upperLimit));
+//         List<Person> personList = mongoTemplate.find(query,Person.class);
+//         return personList;
+//     }
 
-         Query query = new Query();
-         Criteria criteria1 = Criteria.where("email").exists(true);
-         Criteria criteria2 = Criteria.where("sentimentAnalysis").is(true);
-         query.addCriteria(criteria1.andOperator(Criteria.where("sentimentAnalysis").is(true)));
+    public List<Person> findByRoleAndCoding() {
+        Query query = new Query();
+
+        Criteria criteria = new Criteria().andOperator(
+                Criteria.where("role").exists(true),       // Role must be present
+                Criteria.where("hobbies").in("Coding")     // "Coding" must be in hobbies array
+        );
+
+        query.addCriteria(criteria);
+
+        return mongoTemplate.find(query, Person.class);
+    }
 
 
-         List<Person> personList = mongoTemplate.find(query,Person.class);
-         return personList;
-     }
 
-     public List<Person> getPersonsOfAge(int lowerLimit,int upperLimit){
 
-         Query query  = new Query();
-         query.addCriteria(Criteria.where("age").gte(lowerLimit).lte(upperLimit));
-         List<Person> personList = mongoTemplate.find(query,Person.class);
-         return personList;
-     }
 }
